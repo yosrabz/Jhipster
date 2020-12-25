@@ -1,0 +1,69 @@
+<div>
+    <h2 id="page-heading">
+        <span>Pages</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-page" [routerLink]="['/page/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Page
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="pages?.length === 0">
+        <span>No pages found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="pages && pages.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Numero</span></th>
+                    <th scope="col" ><span>Contenu</span></th>
+                    <th scope="col" ><span>Book</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let page of pages ;trackBy: trackId">
+                    <td><a [routerLink]="['/page', page.id, 'view']">{{ page.id }}</a></td>
+                    <td>{{ page.numero }}</td>
+                    <td>{{ page.contenu }}</td>
+                    <td>
+                        <div *ngIf="page.book">
+                            <a [routerLink]="['/book', page.book?.id, 'view']" >{{ page.book?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/page', page.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/page', page.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(page)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

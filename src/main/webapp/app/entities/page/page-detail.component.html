@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="page">
+            <h2><span>Page</span> {{ page.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Numero</span></dt>
+                <dd>
+                    <span>{{ page.numero }}</span>
+                </dd>
+                <dt><span>Contenu</span></dt>
+                <dd>
+                    <span>{{ page.contenu }}</span>
+                </dd>
+                <dt><span>Book</span></dt>
+                <dd>
+                    <div *ngIf="page.book">
+                        <a [routerLink]="['/book', page.book?.id, 'view']">{{ page.book?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/page', page.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
